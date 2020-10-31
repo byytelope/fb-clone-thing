@@ -11,7 +11,7 @@ export default function CommentCard({ comments, postId, user }) {
     const CommentCards = comments.map((comment) => (
         <div className="pb-4" key={comment.id}>
             <div className="flex flex-col shadow w-full md:rounded-lg p-2">
-                <div className="px-2 md:px-1">
+                <div className="px-2 md:px-0">
                     <div className="flex justify-between w-full">
                         <div className="flex pb-1">
                             <div className="flex items-start">
@@ -27,16 +27,18 @@ export default function CommentCard({ comments, postId, user }) {
                                 <div className="font-bold mt-1 text-sm text-secondary">
                                     {comment.username}
                                 </div>
-                                <div className="text-xs text-primary">
+                                <div className="text-xs text-primary -my-1">
                                     {moment(comment.createdAt).fromNow()}
                                 </div>
                             </div>
                         </div>
                         {user && user.username === comment.username && (
-                            <DeleteButton postId={postId} commentId={comment.id} />
+                            <div className="p-2">
+                                <DeleteButton postId={postId} commentId={comment.id} />
+                            </div>
                         )}
                     </div>
-                    <div className="flex py-2 px-8">
+                    <div className="flex pb-2 pt-1 pl-8">
                         <div className="text-secondary text-sm">{comment.body}</div>
                     </div>
                 </div>

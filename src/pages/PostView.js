@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import moment from "moment";
@@ -18,14 +18,11 @@ export default function PostView(props) {
     const { hash } = useLocation();
     const history = useHistory();
     const { user } = useContext(AuthContext);
-    const commentsRef = useRef();
     const postId = props.match.params.postId;
 
     useEffect(() => {
-        if (hash !== "") {
-            const id = hash.replace("#", "");
-            const element = document.getElementById(id);
-            if (element) element.scrollIntoView({ behavior: "smooth" });
+        if (hash === "comments") {
+            scrollToComments();
         }
     }, [hash]);
 
@@ -35,8 +32,10 @@ export default function PostView(props) {
         },
     });
 
-    const scrollToComments = () =>
-        window.scrollTo({ behavior: "smooth", top: commentsRef.current.offsetTop });
+    function scrollToComments() {
+        const element = document.getElementById("comment");
+        element.scrollIntoView({ behavior: "smooth" });
+    }
 
     const deletePostCallback = () => history.push("/");
 
@@ -65,7 +64,7 @@ export default function PostView(props) {
                                         />
                                     </IconButton>
                                 </div>
-                                <div className="place-self-end">
+                                <div className="h-full place-self-end">
                                     {user && username === user.username && (
                                         <DeleteButton postId={id} callback={deletePostCallback} />
                                     )}
@@ -88,7 +87,7 @@ export default function PostView(props) {
                         </div>
                     </div>
                 </div>
-                <div className="md:px-32 xl:px-96" ref={commentsRef} id="comments">
+                <div className="md:px-32 xl:px-96" id="comments">
                     {user && (
                         <div className="py-4 px-4 md:px-0">
                             <CommentForm postId={id} />

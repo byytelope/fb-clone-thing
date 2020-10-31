@@ -31,7 +31,7 @@ export default function PostCard({
                             <FaceTwoToneIcon fontSize="large" className="text-secondary" />
                         </IconButton>
                     </div>
-                    <div className="place-self-end">
+                    <div className="h-full place-self-end">
                         {user && username === user.username && <DeleteButton postId={id} />}
                     </div>
                 </div>
