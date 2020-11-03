@@ -15,14 +15,17 @@ import { AuthContext } from "../contexts/auth";
 import { FETCH_POST_QUERY } from "../utils/graphql";
 
 export default function PostView(props) {
-    const { hash } = useLocation();
-    const history = useHistory();
-    const { user } = useContext(AuthContext);
     const postId = props.match.params.postId;
+    const history = useHistory();
+    const { hash } = useLocation();
+    const { user } = useContext(AuthContext);
 
+    // TODO: Make auto scroll to comments consistent.
     useEffect(() => {
-        if (hash === "comments") {
-            scrollToComments();
+        if (hash !== "") {
+            const id = hash.replace("#", "");
+            const element = document.getElementById(id);
+            if (element) element.scrollIntoView({ behavior: "smooth" });
         }
     }, [hash]);
 
@@ -33,7 +36,7 @@ export default function PostView(props) {
     });
 
     function scrollToComments() {
-        const element = document.getElementById("comment");
+        const element = document.getElementById("comments");
         element.scrollIntoView({ behavior: "smooth" });
     }
 

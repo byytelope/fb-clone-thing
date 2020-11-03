@@ -27,7 +27,7 @@ export default function MenuBar() {
             </nav>
         </div>
     ) : (
-        <div className="flex h-auto w-full border justify-between text-secondary">
+        <div className="flex h-auto w-full border-b justify-between text-secondary">
             <Link to="/" className="px-8 py-6 font-black">
                 LOGO
             </Link>

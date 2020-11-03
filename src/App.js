@@ -34,7 +34,7 @@ export default function App() {
                 <ThemeProvider theme={theme}>
                     <MenuBar />
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/user/:id" component={UserProfile} />
+                    <Route exact path="/users/:username" component={UserProfile} />
                     <Route exact path="/posts/:postId" component={PostView} />
                     <AuthRoute exact path="/login" component={Login} />
                     <AuthRoute exact path="/register" component={Register} />
